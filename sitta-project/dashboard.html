@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - SITTA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" type="image/png" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Efek masuk lembut setelah loader */
+    body {
+      background: linear-gradient(135deg, #E4E2FF, #F8F7FF);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: fadeInBody 1s forwards;
+      animation-delay: 2.2s;
+    }
+
+    @keyframes fadeInBody {
+      to { opacity: 1; }
+    }
+
+    /* Loader */
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #6C63FF, #9A89FF);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 1;
+      animation: fadeOutLoader 1.2s ease forwards;
+      animation-delay: 1.8s;
+    }
+
+    #loader h1 {
+      color: white;
+      font-size: 36px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      opacity: 0;
+      animation: fadeInLogo 1.2s ease forwards;
+    }
+
+    @keyframes fadeInLogo {
+      0% { opacity: 0; transform: scale(0.9); }
+      60% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeOutLoader {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* Navbar glass */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 4px 20px rgba(108, 99, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      z-index: 10;
+      animation: fadeSlideDown 0.8s ease 2.4s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      font-weight: 700;
+      color: #6C63FF;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 25px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #6C63FF;
+      font-weight: 600;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #6C63FF;
+      transition: width 0.3s;
+    }
+
+    .menu a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      margin-top: 110px;
+      flex: 1;
+      padding: 40px;
+      animation: fadeInMain 1s ease 2.4s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInMain {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 10px 10px 25px rgba(108, 99, 255, 0.1);
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(108, 99, 255, 0.2);
+    }
+
+    .card h3 {
+      color: #6C63FF;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      color: #6C63FF;
+      padding: 18px;
+      font-weight: 500;
+      font-size: 14px;
+      border-top: 1px solid rgba(108, 99, 255, 0.1);
+      box-shadow: 0 -4px 20px rgba(108, 99, 255, 0.1);
+      animation: fadeInFooter 1s ease 2.6s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInFooter {
+      to { opacity: 1; }
+    }
+
+    .logout-btn {
+      background: linear-gradient(135deg, #6C63FF, #9A89FF);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(108,99,255,0.3);
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(108,99,255,0.4);
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <h1>📦 SITTA</h1>
+  </div>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">📦 SITTA</div>
+    <div class="menu">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <a href="stok.html">📚 Stok</a>
+      <a href="tracking.html">🚚 Tracking</a>
+    </div>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </nav>
+
+  <!-- Main content -->
+  <main>
+    <h1 style="color:#6C63FF; text-align:center;">Selamat Datang di Dashboard SITTA 🎓</h1>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Total Bahan Ajar</h3>
+        <p id="totalBahan">0</p>
+      </div>
+      <div class="card">
+        <h3>Total Pengiriman</h3>
+        <p id="totalKirim">0</p>
+      </div>
+      <div class="card">
+        <h3>User Aktif</h3>
+        <p id="userInfo">Belum login</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 SITTA — Sistem Informasi Tracking & Bahan Ajar | Universitas Terbuka
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script>
+    window.addEventListener("load", () => {
+      // Fade out loader perlahan
+      setTimeout(() => {
+        const loader = document.getElementById("loader");
+        loader.style.opacity = "0";
+        loader.style.transition = "opacity 1s ease";
+        setTimeout(() => (loader.style.display = "none"), 1000);
+      }, 2000);
+    });
+
+    const hour = new Date().getHours();
+    let greet = "Selamat malam";
+    if (hour >= 4 && hour < 12) greet = "Selamat pagi";
+    else if (hour >= 12 && hour < 15) greet = "Selamat siang";
+    else if (hour >= 15 && hour < 18) greet = "Selamat sore";
+
+    document.getElementById("totalBahan").textContent = dataBahanAjar.length;
+    document.getElementById("totalKirim").textContent = dummyDeliveries.length;
+    document.getElementById("userInfo").textContent = localStorage.getItem("userEmail") || "Belum login";
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.clear();
+      alert("Berhasil logout!");
+      window.location.href = "login.html";
+    });
+
+    // Transisi halus antar halaman
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.6s ease';
+        setTimeout(() => window.location.href = link.href, 500);
+      });
+    });
+  </script>
+</body>
+</html>

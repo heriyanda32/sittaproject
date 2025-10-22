@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚚 Tracking Pengiriman - SITTA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" type="image/png" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #E4E2FF, #F8F7FF);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Navbar glass atas */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(108, 99, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      z-index: 10;
+    }
+
+    .logo {
+      font-weight: 700;
+      color: #6C63FF;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 25px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #6C63FF;
+      font-weight: 600;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #6C63FF;
+      transition: width 0.3s;
+    }
+
+    .menu a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      margin-top: 130px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(14px);
+      border-radius: 25px;
+      padding: 40px;
+      width: 90%;
+      max-width: 650px;
+      box-shadow: 10px 10px 25px rgba(108, 99, 255, 0.1);
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    h2 {
+      color: #6C63FF;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      color: #444;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      background: #f1f1ff;
+      box-shadow: inset 4px 4px 8px #e0e0ff, inset -4px -4px 8px #ffffff;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 14px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      background: #fff;
+      box-shadow: inset 2px 2px 5px #ccc, inset -2px -2px 5px #fff;
+    }
+
+    button {
+      background: linear-gradient(135deg, #6C63FF, #9A89FF);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(108, 99, 255, 0.4);
+    }
+
+    #result {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 6px 6px 15px rgba(108, 99, 255, 0.1);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .card p {
+      margin: 8px 0;
+      color: #444;
+    }
+
+    .progress {
+      width: 100%;
+      height: 15px;
+      background: #e0e0ff;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(135deg, #4caf50, #80e27e);
+      width: 0%;
+      border-radius: 10px;
+      transition: width 0.8s ease;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: column;
+        padding: 12px;
+      }
+      .menu {
+        gap: 15px;
+      }
+      main {
+        margin-top: 150px;
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">🚚 <span>SITTA</span></div>
+    <div class="menu">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <a href="stok.html">📦 Stok</a>
+      <a href="tracking.html">🚚 Tracking</a>
+    </div>
+  </nav>
+
+  <main>
+    <h2>Lacak Status Pengiriman</h2>
+    <p>Masukkan nomor DO untuk melihat status pengiriman bahan ajar.</p>
+
+    <label for="doInput">Nomor Delivery Order (DO)</label>
+    <input id="doInput" placeholder="Contoh: DO2025001" />
+    <button id="searchBtn">Cari</button>
+
+    <div id="result"></div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script>
+    const btn = document.getElementById("searchBtn");
+    const result = document.getElementById("result");
+
+    btn.addEventListener("click", () => {
+      const query = document.getElementById("doInput").value.trim();
+      result.innerHTML = "";
+
+      if (!query) {
+        alert("Masukkan nomor DO terlebih dahulu!");
+        return;
+      }
+
+      const found = dummyDeliveries.find(d => d.doNumber === query);
+
+      if (!found) {
+        result.innerHTML = "<p style='color:red; text-align:center;'><strong>Nomor DO tidak ditemukan.</strong></p>";
+        return;
+      }
+
+      const progressWidth = found.status === "Sudah Dikirim" ? 100 : 60;
+
+      result.innerHTML = `
+        <div class="card">
+          <h3 style="color:#6C63FF; margin-bottom:10px;">Hasil Pencarian</h3>
+          <p><strong>Nomor DO:</strong> ${found.doNumber}</p>
+          <p><strong>Nama Penerima:</strong> ${found.nama}</p>
+          <p><strong>Status:</strong> ${found.status}</p>
+          <p><strong>Ekspedisi:</strong> ${found.ekspedisi}</p>
+          <p><strong>Tanggal:</strong> ${found.tanggal}</p>
+          <div class="progress">
+            <div class="progress-bar" style="width: ${progressWidth}%"></div>
+          </div>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
