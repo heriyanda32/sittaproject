@@ -28,7 +28,6 @@ JavaScript (Vanilla)	Logika interaktif & manipulasi DOM
 LocalStorage	Simulasi penyimpanan data login di browser
 GitHub Pages	Hosting gratis untuk proyek web statis
 Website
-https://farizhutors.github.io/sitta-project/sitta-ordering/login.html
-
+https://heriyanda32.github.io/sittaproject/sitta-project/login.html
 Login
 Email: mahasiswa@ut.ac.id Password: password123
